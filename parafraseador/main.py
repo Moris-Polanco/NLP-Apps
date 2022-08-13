@@ -1,5 +1,5 @@
 import streamlit as st
-import gateways
+import gateway
 
 def header():
     st.header('Parafraseador')
@@ -13,7 +13,7 @@ def instert_text():
     if colum1.button("Acortar"):
         with st.spinner(text='en progreso'):
             
-            new_txt, status = gateways.conect_parafraseor(txt)
+            new_txt, status = gateway.conect_parafraseor(txt)
             
             if status == 200:
                 st.text_area(label="Texto parafraseado:", value=new_txt["paraphrased_text"])

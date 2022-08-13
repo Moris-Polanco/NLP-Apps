@@ -1,5 +1,5 @@
 import streamlit as st
-import gateways
+import gateway
 
 def header():
     st.header('Resumidor')
@@ -12,7 +12,7 @@ def instert_text():
     if colum1.button("Resuma"):
         with st.spinner(text='en progreso'):
             
-            new_txt, status = gateways.conect_resumidor(txt)
+            new_txt, status = gateway.conect_resumidor(txt)
             
             if status == 200:
                 st.text_area(label="Texto resumido:", value=new_txt["summary_text"], height=250)
