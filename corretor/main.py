@@ -1,5 +1,5 @@
 import streamlit as st
-import gateways
+import gateway
 
 def header():
     st.header('Corrector de estilo')
@@ -12,7 +12,7 @@ def instert_text():
     if colum1.button("Corrija"):
         with st.spinner(text='en progreso'):
             
-            new_txt, status = gateways.conect_corretor_estilo(txt)
+            new_txt, status = gateway.conect_corretor_estilo(txt)
         
             if status == 200:
                 st.text_area(label="Texto corregido:", value=new_txt["correction"], height=250)
