@@ -7,7 +7,9 @@ TOKEN = os.getenv("TOKEN")
 def conect_gerador_casos_etica(data):
     
     openai.api_key = os.getenv("OPENAI_API_KEY")
-    prompt = "Con las siguientes palabras clave, genere un caso de ética."+data
+
+    text_exemple = read_text_exemple()
+    prompt = "Con las siguientes palabras clave, genere un caso de ética."+text_exemple+data
 
     try:
         response = openai.Completion.create(
@@ -23,3 +25,10 @@ def conect_gerador_casos_etica(data):
         return dict(response["choices"][0])["text"].replace("\n\n", "") , 200
     except Exception as err:
         return {"Error": err}, 500
+
+
+def read_text_exemple():
+    f = open('texto.txt', 'r')
+    content = f.read()
+    print(content)
+    return content
