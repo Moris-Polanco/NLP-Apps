@@ -1,9 +1,6 @@
 import os
 import openai
 
-TOKEN = os.getenv("TOKEN")
-
-
 def conect_estilo_tamara(data):
     
     openai.api_key = os.getenv("OPENAI_API_KEY")

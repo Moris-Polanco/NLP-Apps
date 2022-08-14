@@ -1,19 +1,34 @@
 import os
-import requests
+import openai
 
 TOKEN = os.getenv("TOKEN")
 
 def conect_palavras_clave(data):
-    url = 'https://api.nlpcloud.io/v1/gpu/es/finetuned-gpt-neox-20b/kw-kp-extraction'
-    headers = {"Content-Type": "application/json", "Authorization": TOKEN}
+    
+    openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    text = {
-        "text":data
-    }
+    text_exemple = read_text_exemple()
+    prompt = "Extraiga palabras clave de este texto."+text_exemple+data
 
-    response = requests.post(url, json=text, headers=headers)
+    try:
+        response = openai.Completion.create(
+            model="text-davinci-002",
+            prompt=prompt,
+            temperature=0.7,
+            max_tokens=545,
+            top_p=1,
+            frequency_penalty=0.5,
+            presence_penalty=0.58,
+            stop=["###"])
 
-    if response.status_code == 200:
-        return response.json(), response.status_code
-    else:
-        return {"Error": response.status_code}, response.status_code
+        return dict(response["choices"][0])["text"].replace("\n\n", "") , 200
+    except Exception as err:
+        return {"Error": err}, 500
+    
+   
+
+
+def read_text_exemple():
+    f = open('texto.txt', 'r')
+    content = f.read()
+    return content
