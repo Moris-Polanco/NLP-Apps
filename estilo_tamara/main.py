@@ -13,7 +13,7 @@ def instert_text():
     if colum1.button("Genere Texto"):
         with st.spinner(text='en progreso'):
             
-            new_txt, status = gateway.conect_gerador_casos_etica(txt)
+            new_txt, status = gateway.conect_estilo_tamara(txt)
             status = 200
             
             if status == 200:
