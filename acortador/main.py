@@ -2,7 +2,7 @@ import streamlit as st
 import gateway
 
 def header():
-    st.header('Acortador')
+    st.header('Acortadorg')
     st.text('version 0 - Last update 08/08/2022')
 
 def instert_text():
