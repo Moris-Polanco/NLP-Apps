@@ -15,7 +15,7 @@ def instert_text():
             new_txt, status = gateway.conect_resumidor(txt)
             
             if status == 200:
-                st.text_area(label="Texto resumido:", value=new_txt["summary_text"], height=250)
+                st.text_area(label="Texto resumido:", value=new_txt, height=250)
                 st.success("¡Resumió!")  
             else:
                 st.text_area(label="Error:", value=new_txt["Error"])
